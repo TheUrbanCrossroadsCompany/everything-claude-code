@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-text font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading font-bold tracking-tight;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-brand-accent ring-offset-2;
+  }
+}
+
+@layer components {
+  .prose-site {
+    @apply max-w-none leading-relaxed;
+  }
+  .prose-site h2 {
+    @apply mt-10 mb-4 text-2xl;
+  }
+  .prose-site h3 {
+    @apply mt-8 mb-3 text-xl;
+  }
+  .prose-site p {
+    @apply my-4;
+  }
+  .prose-site ul {
+    @apply my-4 list-disc pl-6;
+  }
+  .prose-site ol {
+    @apply my-4 list-decimal pl-6;
+  }
+  .prose-site li {
+    @apply my-1;
+  }
+  .prose-site a {
+    @apply text-brand-primary underline underline-offset-2;
+  }
+  .prose-site strong {
+    @apply font-semibold;
+  }
+  .prose-site blockquote {
+    @apply my-6 border-l-4 border-brand-primary pl-4 italic text-brand-muted;
+  }
+}

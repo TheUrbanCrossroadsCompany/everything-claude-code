@@ -14,16 +14,21 @@ export default defineSiteConfig({
   niche: 'health-education',
   description:
     'A fun, science-curious education and daily tracking app for metabolic health: food quality, exercise, stress, forever-chemical reduction, clean water, and glucose–ketone awareness.',
+  heroEyebrow: 'The Metabolic Manifesto',
+  // Dark editorial theme: near-black base (#0B0B0F), cream type, one
+  // high-energy red reserved for numbers, progress, and CTAs — the pattern
+  // proven by data-dense trackers (Whoop, Oura) and the manifesto artwork.
   theme: {
-    primary: '13 148 136',
-    accent: '234 88 12',
-    bg: '250 250 249',
-    surface: '255 255 255',
-    text: '28 25 23',
-    muted: '87 83 78',
-    headingFont: "'Avenir Next', 'Segoe UI', system-ui",
-    bodyFont: "'Avenir Next', 'Segoe UI', system-ui",
-    radius: '1rem'
+    primary: '230 57 46',
+    accent: '255 96 66',
+    bg: '11 11 15',
+    surface: '24 24 29',
+    text: '244 241 232',
+    muted: '160 157 148',
+    headingFont: "'Helvetica Neue', 'Segoe UI', system-ui",
+    bodyFont: "'Helvetica Neue', 'Segoe UI', system-ui",
+    radius: '0.5rem',
+    headingUppercase: true
   },
   nav: [
     { label: 'Six Pillars', href: '/pillars' },

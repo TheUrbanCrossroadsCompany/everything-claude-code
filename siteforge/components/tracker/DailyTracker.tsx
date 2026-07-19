@@ -139,7 +139,7 @@ export function DailyTracker() {
                 onChange={(e) =>
                   update({ glucoseMgDl: e.target.value === '' ? null : Number(e.target.value) })
                 }
-                className="mt-1 block w-32 rounded-brand border border-brand-text/20 px-3 py-2"
+                className="mt-1 block w-32 rounded-brand border border-brand-text/20 bg-brand-bg px-3 py-2 text-brand-text"
               />
             </label>
             <label className="text-sm">
@@ -153,7 +153,7 @@ export function DailyTracker() {
                 onChange={(e) =>
                   update({ ketonesMmol: e.target.value === '' ? null : Number(e.target.value) })
                 }
-                className="mt-1 block w-32 rounded-brand border border-brand-text/20 px-3 py-2"
+                className="mt-1 block w-32 rounded-brand border border-brand-text/20 bg-brand-bg px-3 py-2 text-brand-text"
               />
             </label>
           </div>
@@ -170,7 +170,7 @@ export function DailyTracker() {
           <p className="text-xs font-bold uppercase tracking-widest text-brand-muted">
             Today’s grade
           </p>
-          <p className="mt-2 font-heading text-6xl font-extrabold text-brand-primary">{grade}</p>
+          <p className="mt-2 font-heading text-7xl font-extrabold text-brand-primary">{grade}</p>
           <p className="mt-1 text-sm text-brand-muted">{score}% of daily habits</p>
           <div
             role="progressbar"

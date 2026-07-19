@@ -11,9 +11,15 @@ export default function HomePage() {
   return (
     <div className="space-y-14">
       <section className="pt-6 text-center">
-        <h1 className="mx-auto max-w-3xl text-4xl sm:text-5xl">
+        {site.heroEyebrow ? (
+          <p className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-brand-primary">
+            {site.heroEyebrow}
+          </p>
+        ) : null}
+        <h1 className="mx-auto max-w-3xl text-4xl sm:text-6xl">
           {site.tagline}
         </h1>
+        <div aria-hidden="true" className="mx-auto mt-6 h-0.5 w-24 bg-brand-primary" />
         <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-muted">{site.description}</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           {site.features.tracker ? (

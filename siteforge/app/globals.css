@@ -10,7 +10,9 @@
   h2,
   h3,
   h4 {
-    @apply font-heading font-bold tracking-tight;
+    @apply font-heading font-bold;
+    text-transform: var(--heading-transform, none);
+    letter-spacing: var(--heading-tracking, -0.02em);
   }
   a:focus-visible,
   button:focus-visible,

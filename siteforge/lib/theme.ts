@@ -11,6 +11,8 @@ export function themeToCssVars(theme: ThemeTokens): string {
     `--color-muted: ${theme.muted};`,
     `--font-heading: ${theme.headingFont};`,
     `--font-body: ${theme.bodyFont};`,
-    `--radius-brand: ${theme.radius};`
+    `--radius-brand: ${theme.radius};`,
+    `--heading-transform: ${theme.headingUppercase ? 'uppercase' : 'none'};`,
+    `--heading-tracking: ${theme.headingUppercase ? '0.02em' : '-0.02em'};`
   ].join('\n  ');
 }

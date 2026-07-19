@@ -4,6 +4,33 @@ One codebase → many independent, deployable niche websites for The Urban Cross
 Company. Each domain gets its own brand, content, and revenue streams from a single
 config folder. Static generation everywhere; no database.
 
+## ⚠️ TO DO before building any page: design research first
+
+We do not ship cookie-cutter layouts. Every new site/page starts from designs
+proven by companies that already spent the development budget:
+
+1. **Connect the Mobbin MCP server** (already cataloged in
+   `../mcp-configs/mcp-servers.json`):
+   `claude mcp add mobbin --scope user --transport http https://api.mobbin.com/mcp`
+   — OAuth prompt on first use. Requires an interactive session with network
+   access to `api.mobbin.com` (remote/CI sandboxes typically block it; do the
+   research step from a local interactive session).
+2. **Research the niche's proven apps on Mobbin** (e.g. health tracking:
+   Whoop, Oura, Levels; solar/lead-gen: service marketplaces; crypto:
+   exchanges/education apps). Capture: base palette, the ONE accent color,
+   type scale, layout of the money screens (dashboard, article, capture).
+3. **Encode the findings as theme tokens** in `sites/<domain>/site.config.ts`
+   (colors, fonts, radius, `headingUppercase`, `heroEyebrow`). Components must
+   stay generic — research results live in config, never hardcoded in
+   components.
+4. Fallback when Mobbin is unavailable: teardown articles + official design
+   blogs of the same reference apps via web search, then step 3 as usual.
+
+Current demo-site theme provenance: the six-pillar manifesto artwork
+(black/cream/red editorial) merged with dark-tracker patterns documented for
+Whoop/Oura (near-black `#0B0B0F` base, single high-energy accent reserved for
+progress + CTAs, oversized numeric stats).
+
 ## Quick start
 
 ```bash

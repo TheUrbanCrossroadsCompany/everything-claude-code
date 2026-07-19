@@ -21,7 +21,9 @@ export const themeTokensSchema = z.object({
   muted: z.string().regex(/^\d{1,3} \d{1,3} \d{1,3}$/),
   headingFont: z.string().default('system-ui'),
   bodyFont: z.string().default('system-ui'),
-  radius: z.string().default('0.75rem')
+  radius: z.string().default('0.75rem'),
+  /** Manifesto-style condensed uppercase headings (e.g. dark editorial themes). */
+  headingUppercase: z.boolean().default(false)
 });
 
 export const navItemSchema = z.object({
@@ -82,6 +84,8 @@ export const siteConfigSchema = z.object({
   tagline: z.string(),
   niche: z.enum(['health-education', 'tech-affiliate', 'solar-leadgen', 'crypto-education', 'general']),
   description: z.string(),
+  /** Small kicker line rendered above the hero headline (editorial style). */
+  heroEyebrow: z.string().optional(),
   logoPath: z.string().optional(),
   theme: themeTokensSchema,
   nav: z.array(navItemSchema),

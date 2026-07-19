@@ -86,6 +86,11 @@
       "url": "https://mcp.clickhouse.cloud/mcp",
       "description": "ClickHouse analytics queries"
     },
+    "mobbin": {
+      "type": "http",
+      "url": "https://api.mobbin.com/mcp",
+      "description": "Mobbin design reference library — search real-world app screens, UI patterns, and user flows for design research. Add via: claude mcp add mobbin --scope user --transport http https://api.mobbin.com/mcp (authenticates via OAuth on first use)"
+    },
     "exa-web-search": {
       "command": "npx",
       "args": ["-y", "exa-mcp-server"],

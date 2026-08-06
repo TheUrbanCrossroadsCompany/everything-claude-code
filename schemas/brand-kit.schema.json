@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://everything-claude-code/schemas/brand-kit.schema.json",
+  "title": "Video Brand Kit",
+  "description": "Per-client visual system for the video pipeline. Swap this file to rebrand the same storyboard without touching the script or scene structure.",
+  "type": "object",
+  "required": ["name", "colors", "fonts"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string" },
+    "colors": {
+      "type": "object",
+      "required": ["ink", "paper", "text", "muted", "hairline", "accentPrimary", "accentSecondary"],
+      "additionalProperties": false,
+      "properties": {
+        "ink": { "$ref": "#/definitions/hex", "description": "Dark bookend background" },
+        "paper": { "$ref": "#/definitions/hex", "description": "Light body background" },
+        "text": { "$ref": "#/definitions/hex" },
+        "muted": { "$ref": "#/definitions/hex" },
+        "hairline": { "$ref": "#/definitions/hex" },
+        "accentPrimary": { "$ref": "#/definitions/hex", "description": "On paper" },
+        "accentPrimaryBright": { "$ref": "#/definitions/hex", "description": "Accent variant for ink backgrounds" },
+        "accentSecondary": { "$ref": "#/definitions/hex", "description": "Reserved for the secondary thread, on paper" },
+        "accentSecondaryBright": { "$ref": "#/definitions/hex" }
+      }
+    },
+    "meaning": {
+      "type": "object",
+      "description": "Semantic colour rules. Keeps each accent meaningful rather than decorative.",
+      "additionalProperties": false,
+      "properties": {
+        "accentPrimary": { "type": "string" },
+        "accentSecondary": { "type": "string" }
+      }
+    },
+    "fonts": {
+      "type": "object",
+      "required": ["display", "body"],
+      "additionalProperties": false,
+      "properties": {
+        "display": { "type": "string" },
+        "body": { "type": "string" },
+        "displayWeight": { "type": "integer", "default": 800 },
+        "googleFontsUrl": { "type": "string" }
+      }
+    },
+    "logo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "light": { "type": "string", "description": "Logo for dark backgrounds" },
+        "dark": { "type": "string", "description": "Logo for light backgrounds" },
+        "safeAreaPct": { "type": "number", "default": 6 }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ease": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 4,
+          "maxItems": 4,
+          "default": [0.16, 1, 0.3, 1],
+          "description": "cubic-bezier control points, matched across the web and video systems"
+        },
+        "revealMs": { "type": "integer", "default": 600 },
+        "staggerMs": { "type": "integer", "default": 80 },
+        "countUpMs": { "type": "integer", "default": 1200 }
+      }
+    },
+    "lowerThird": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "position": { "type": "string", "enum": ["bottom-left", "bottom-center", "bottom-right"], "default": "bottom-left" }
+      }
+    }
+  },
+  "definitions": {
+    "hex": { "type": "string", "pattern": "^#([0-9a-fA-F]{6})$" }
+  }
+}

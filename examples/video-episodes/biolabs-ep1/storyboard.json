@@ -1,0 +1,261 @@
+{
+  "episode": {
+    "title": "20/20 BioLabs — Monthly Investor Webinar Recap",
+    "subject": "Investor webinar recap: early cancer detection and a longevity test",
+    "client": "20/20 BioLabs",
+    "slug": "biolabs-investor-recap-ep1",
+    "targetSeconds": 110,
+    "aspect": "16:9"
+  },
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "brand": "brand.json",
+  "voice": {
+    "provider": "elevenlabs",
+    "voiceId": "REPLACE_WITH_YOUR_CLONED_VOICE_ID",
+    "modelId": "eleven_multilingual_v2",
+    "stability": 0.5,
+    "similarityBoost": 0.75,
+    "speed": 1
+  },
+  "music": {
+    "src": "music/bed.mp3",
+    "gainDb": -22,
+    "duckUnderVoiceDb": -32
+  },
+  "scenes": [
+    {
+      "id": 1,
+      "name": "Hero",
+      "background": "ink",
+      "accent": "primary",
+      "durationSeconds": 9,
+      "vo": "This is the monthly investor recap for 20/20 BioLabs, a clinical lab in Gaithersburg, Maryland, building early cancer detection from tumor proteins, plus a new longevity test on inflammatory biomarkers. Your speakers: CEO Jonathan Cohen and Director of Sales David Lees.",
+      "graphic": {
+        "type": "hero-title",
+        "props": {
+          "eyebrow": "Monthly Investor Webinar — Recap",
+          "title": "20/20 BioLabs",
+          "sub": "Early cancer detection from tumor proteins, plus a longevity test on inflammatory biomarkers.",
+          "speakers": ["Jonathan Cohen — CEO", "David Lees — Director of Sales"],
+          "location": "Clinical lab · Gaithersburg, Maryland"
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "slow abstract macro of a clinical laboratory, concentric focus rings of cool blue light on deep black, particles drifting",
+        "negativePrompt": "text, watermark, logo, people faces, distortion, oversaturated",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "slow-push",
+        "opacity": 0.5
+      }
+    },
+    {
+      "id": 2,
+      "name": "The business today",
+      "background": "paper",
+      "accent": "primary",
+      "durationSeconds": 15,
+      "vo": "Start with the business. Revenue runs between two-and-a-half and three million dollars a year, and it is growing forty to fifty percent. Twenty-nine new accounts landed in the second quarter. The step change ahead is Medicare reimbursement, targeted for twenty twenty-eight.",
+      "graphic": {
+        "type": "stat-row",
+        "props": {
+          "eyebrow": "01 — The business today",
+          "headline": "Compounding 40–50% a year.",
+          "stats": [
+            { "prefix": "$", "value": 2.5, "value2": 3, "suffix": "M", "decimals": 1, "label": "Annual revenue" },
+            { "value": 40, "value2": 50, "suffix": "%", "decimals": 0, "label": "Year-over-year growth" },
+            { "value": 29, "decimals": 0, "label": "New accounts in Q2" },
+            { "value": 2028, "decimals": 0, "label": "Medicare reimbursement", "tag": "Target" }
+          ]
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "abstract dot-grid and thin rising line graph, cobalt on off-white paper, minimal editorial motion",
+        "negativePrompt": "text, numbers, watermark, logo, distortion",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "slow-push",
+        "opacity": 0.12
+      }
+    },
+    {
+      "id": 3,
+      "name": "Proteins, not ctDNA",
+      "background": "paper",
+      "accent": "primary",
+      "durationSeconds": 16,
+      "vo": "The differentiator: 20/20 measures tumor proteins, not circulating tumor DNA. The signal shows up earlier, and every report carries the actual biomarker values, so repeat tests plot a trajectory over time. Groups disappointed with ctDNA-based tests are switching.",
+      "graphic": {
+        "type": "split",
+        "props": {
+          "eyebrow": "02 — The differentiator",
+          "headline": "Proteins, not ctDNA.",
+          "left": { "title": "The ctDNA approach", "body": "Detects fragments of circulating tumor DNA shed into the bloodstream." },
+          "right": { "title": "The 20/20 approach", "body": "Measures tumor proteins directly. Detection comes earlier, and each report shows the actual biomarker values." },
+          "chartCaption": "Repeat tests plot a trajectory over time. Illustrative — each point is one test in a series.",
+          "pullquote": "Groups disappointed with ctDNA-based tests are switching."
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "abstract protein and molecular structures drifting, cool blue, shallow depth of field, dark microscope aesthetic",
+        "negativePrompt": "text, watermark, logo, distortion, oversaturated",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "orbit",
+        "opacity": 0.12
+      }
+    },
+    {
+      "id": 4,
+      "name": "Best quarter",
+      "background": "paper",
+      "accent": "primary",
+      "durationSeconds": 16,
+      "vo": "Q2 was the best cancer-testing quarter in company history. The twenty-nine new accounts came from five categories: fire departments, occupational health groups, preventive health companies, nonprofits, and physician offices. The Maryland state firefighter screening program is live; Vermont is next.",
+      "graphic": {
+        "type": "chips",
+        "props": {
+          "eyebrow": "03 — Best quarter on record",
+          "headline": "29 new accounts in the best quarter yet.",
+          "ghost": "Q2",
+          "chips": ["Fire departments", "Occupational health groups", "Preventive health companies", "Nonprofits", "Physician offices"],
+          "programs": [
+            { "status": "Live", "label": "Maryland State Firefighter Cancer Screening Program" },
+            { "status": "Next", "label": "Vermont State Cancer Screening Program" }
+          ]
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "abstract silhouettes of a firefighter jacket and occupational safety gear, cool light, editorial, no faces",
+        "negativePrompt": "text, watermark, logo, faces, distortion",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "slow-push",
+        "opacity": 0.1
+      }
+    },
+    {
+      "id": 5,
+      "name": "Giant Foods pilot",
+      "background": "paper",
+      "accent": "secondary",
+      "durationSeconds": 13,
+      "vo": "On the longevity side, a pilot with Giant Foods. Employees test first, pairing inflammatory biomarkers with dietary data. If it works, shelf placement could follow. An update is due at the October webinar.",
+      "graphic": {
+        "type": "flow",
+        "props": {
+          "eyebrow": "04 — Longevity pilot",
+          "headline": "Longevity testing, from employees to shelves.",
+          "steps": [
+            { "n": "01", "title": "Employees first", "body": "Giant Foods employees take the longevity test." },
+            { "n": "02", "title": "Biomarkers × diet", "body": "Inflammatory biomarkers paired with dietary data." },
+            { "n": "03", "title": "Shelves, if it works", "body": "Success could lead to shelf placement.", "tag": "Potential" }
+          ],
+          "note": "Update due at the October webinar."
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "bright grocery aisle bokeh and fresh produce, warm daylight with teal accents, wellness mood, no faces",
+        "negativePrompt": "text, watermark, logo, faces, distortion",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "pan-right",
+        "opacity": 0.12
+      }
+    },
+    {
+      "id": 6,
+      "name": "East Asia",
+      "background": "ink",
+      "accent": "primary",
+      "durationSeconds": 17,
+      "vo": "The CEO's East Asia trip: a region with a strong prevention culture. He reconnected with collaborators, built new relationships, and gathered real-world data for FDA submissions and Medicare coverage, while scouting acquisitions. The plan: a royalty pool putting five percent of post-Medicare revenue back to the partner groups that contribute data.",
+      "graphic": {
+        "type": "quote",
+        "props": {
+          "eyebrow": "05 — East Asia",
+          "headline": "A 5% royalty pool for data partners.",
+          "points": [
+            { "h": "Prevention culture", "body": "A region already oriented toward early detection." },
+            { "h": "Real-world data", "body": "Evidence built for FDA submissions and Medicare coverage." },
+            { "h": "M&A scouting", "body": "Evaluating acquisition targets on the ground." }
+          ],
+          "callout": { "kicker": "Planned", "big": "5% of post-Medicare-reimbursement revenue", "sub": "allocated to a royalty pool for the partner groups that contribute data." }
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "cinematic East Asian city skyline at blue hour, calm, cool tones, slow aerial drift, no text signage",
+        "negativePrompt": "text, watermark, logo, readable signage, distortion",
+        "seed": 2020,
+        "durationSeconds": 10,
+        "motion": "slow-push",
+        "opacity": 0.45
+      }
+    },
+    {
+      "id": 7,
+      "name": "What happens next",
+      "background": "paper",
+      "accent": "primary",
+      "durationSeconds": 14,
+      "vo": "What is next, in four milestones. September's webinar covers the East Asia trip in detail. October brings Giant Foods pilot results. The first formal FDA meeting is planned for the fall. And Medicare reimbursement is the twenty twenty-eight target.",
+      "graphic": {
+        "type": "timeline",
+        "props": {
+          "eyebrow": "06 — What happens next",
+          "headline": "Four milestones through 2028.",
+          "items": [
+            { "date": "September webinar", "title": "East Asia trip, in detail" },
+            { "date": "October webinar", "title": "Giant Foods pilot results" },
+            { "date": "Fall", "title": "First formal FDA meeting", "tag": "Planned", "note": "Coordinated with an FDA advisory firm, part of the multi-cancer test pathway." },
+            { "date": "2028", "title": "Medicare reimbursement", "tag": "Target", "note": "Enabled by a bipartisan law — the step-change revenue driver." }
+          ]
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "abstract vertical line drawing itself downward past glowing nodes, cobalt on paper, minimal roadmap motion",
+        "negativePrompt": "text, watermark, logo, distortion",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "static",
+        "opacity": 0.1
+      }
+    },
+    {
+      "id": 8,
+      "name": "Close",
+      "background": "ink",
+      "accent": "primary",
+      "durationSeconds": 14,
+      "vo": "The shape of the bet: biopharma upside, with device-grade downside protection. For investor questions or M&A leads, reach out to the 20/20 BioLabs team. Webinar attendees got a limited-time code, Web20. This is an informational recap, not an offer to sell securities; targets are goals, not guarantees.",
+      "graphic": {
+        "type": "cta",
+        "props": {
+          "headline": "Biopharma upside. Device-grade downside protection.",
+          "sub": "The upside potential of a biopharmaceutical company, with the downside protection of a medical device company.",
+          "contact": "For investor questions or M&A leads, reach out to the 20/20 BioLabs team.",
+          "attendee": "Webinar attendees received a limited-time investor discount code: Web20.",
+          "disclaimer": "Informational recap only — not an offer to sell or a solicitation to buy securities. Targets and planned milestones are goals, not guarantees."
+        }
+      },
+      "broll": {
+        "provider": "kling",
+        "prompt": "abstract concentric cobalt rings resolving to a single focal point on deep black, calm resolve",
+        "negativePrompt": "text, watermark, logo, distortion",
+        "seed": 2020,
+        "durationSeconds": 5,
+        "motion": "slow-push",
+        "opacity": 0.4
+      }
+    }
+  ]
+}

@@ -127,6 +127,15 @@
       },
       "description": "AI image/video/audio generation via fal.ai models"
     },
+    "kling": {
+      "command": "npx",
+      "args": ["-y", "mcp-kling@latest"],
+      "env": {
+        "KLING_ACCESS_KEY": "YOUR_KLING_ACCESS_KEY_HERE",
+        "KLING_SECRET_KEY": "YOUR_KLING_SECRET_KEY_HERE"
+      },
+      "description": "Kling AI video generation (text-to-video, image-to-video) — create an API key in the Kling console to get the access/secret key pair; the server signs the JWT tokens Kling's API requires"
+    },
     "browserbase": {
       "command": "npx",
       "args": ["-y", "@browserbasehq/mcp-server-browserbase"],

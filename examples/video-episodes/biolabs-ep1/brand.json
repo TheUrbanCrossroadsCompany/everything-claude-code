@@ -1,0 +1,31 @@
+{
+  "name": "Electric Studio — 20/20 BioLabs",
+  "colors": {
+    "ink": "#0B0D12",
+    "paper": "#F7F7F4",
+    "text": "#14161C",
+    "muted": "#565B66",
+    "hairline": "#E3E3DC",
+    "accentPrimary": "#1D4ED8",
+    "accentPrimaryBright": "#5B7CFF",
+    "accentSecondary": "#0F766E",
+    "accentSecondaryBright": "#2DD4BF"
+  },
+  "meaning": {
+    "accentPrimary": "Core cancer-detection business: key metrics, timeline spine, active states",
+    "accentSecondary": "Longevity/wellness thread only: Giant Foods pilot, inflammatory biomarkers"
+  },
+  "fonts": {
+    "display": "Manrope",
+    "body": "Manrope",
+    "displayWeight": 800,
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap"
+  },
+  "motion": {
+    "ease": [0.16, 1, 0.3, 1],
+    "revealMs": 600,
+    "staggerMs": 80,
+    "countUpMs": 1200
+  },
+  "lowerThird": { "position": "bottom-left" }
+}

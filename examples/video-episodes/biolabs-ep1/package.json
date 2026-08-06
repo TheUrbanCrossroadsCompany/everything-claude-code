@@ -1,0 +1,29 @@
+{
+  "name": "biolabs-ep1",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-contained Remotion project for the 20/20 BioLabs investor recap episode",
+  "scripts": {
+    "studio": "remotion studio remotion/index.ts",
+    "render": "remotion render remotion/index.ts Episode out/episode.mp4",
+    "still": "remotion still remotion/index.ts Episode out/still.png --frame=120",
+    "voice": "node bin/voice.mjs",
+    "broll": "node bin/broll.mjs",
+    "video": "npm run voice && npm run broll && npm run render"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.0.0",
+    "@remotion/cli": "4.0.506",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.506"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

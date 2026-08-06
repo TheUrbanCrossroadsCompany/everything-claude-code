@@ -127,6 +127,11 @@
       },
       "description": "AI image/video/audio generation via fal.ai models"
     },
+    "kling": {
+      "type": "http",
+      "url": "https://kling.ai/mcp",
+      "description": "Kling AI video generation (text-to-video, image-to-video) — hosted MCP endpoint. Add via: claude mcp add kling --scope user --transport http https://kling.ai/mcp (authenticates via OAuth on first use). Alternative: the mcp-kling npx server with a Kling access/secret key pair"
+    },
     "browserbase": {
       "command": "npx",
       "args": ["-y", "@browserbasehq/mcp-server-browserbase"],

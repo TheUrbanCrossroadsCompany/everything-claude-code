@@ -1,24 +1,29 @@
 # Key Features Summary — Claude Design bundle
 
-A presentation-ready, self-contained HTML design prepared for use with Claude Design:
-a single 1920×1080 slide summarizing the key features of an end-to-end job matching
-platform.
+Presentation-ready, self-contained HTML designs prepared for use with Claude Design:
+the key features of an end-to-end job matching platform, in three variants.
 
 ## Files
 
-- `index.html` — the complete design. One slide, no JavaScript, no external requests;
-  all styles are inline CSS and all icons are inline SVG, so it renders identically
-  offline, in a sandboxed importer, or behind a strict CSP.
+- `index.html` — dark theme, 1920×1080 landscape slide (3×3 feature card grid).
+- `light.html` — light theme, same 1920×1080 landscape layout and content.
+- `portrait.html` — light theme, 1240×1754 (A4-proportion) one-pager with numbered
+  feature rows; suited to print, PDF export, and email attachment.
 
-## Using it with Claude Design
+All three are single documents with no JavaScript and no external requests; all styles
+are inline CSS and all icons are inline SVG, so they render identically offline, in a
+sandboxed importer, or behind a strict CSP.
 
-- Attach or paste `index.html` into a Claude session with design access and iterate on
-  it there, or hand it to any HTML-import pipeline.
-- The document is self-describing for importers: the slide container is `.slide`
-  (declared via the `hz:slide-selector` meta tag) and carries
-  `data-canvas-width="1920" data-canvas-height="1080"`.
-- Opened directly in a browser, the slide renders at natural size, centered on a dark
-  backdrop.
+## Using them with Claude Design
+
+- Attach or paste any of the HTML files into a Claude session with design access and
+  iterate on it there, or hand it to any HTML-import pipeline.
+- Each document is self-describing for importers: the canvas container is `.slide`
+  (declared via the `hz:slide-selector` meta tag) and carries matching
+  `data-canvas-width`/`data-canvas-height` attributes (1920×1080 for the landscape
+  slides, 1240×1754 for the portrait one-pager).
+- Opened directly in a browser, each canvas renders at natural size, centered on a
+  neutral backdrop.
 
 ## Content
 
@@ -42,10 +47,14 @@ capabilities."
 
 ## Design notes
 
-- Layout: header (eyebrow, title, subtitle, 9/9 completion badge), 3×3 feature card
-  grid, footer with capability chips and credit line.
-- Tokens live in `:root` at the top of the stylesheet — palette is deep navy
-  (`#0b1322` → `#090f1c`) with electric blue accent (`#5b9bff`) and success green
-  (`#3ddc97`); type is the system UI stack (Inter/SF/Segoe first).
+- Shared structure: header (eyebrow, title, subtitle, 9/9 completion badge), the nine
+  feature cards (grid in landscape, numbered rows in portrait), footer with capability
+  chips and credit line.
+- Tokens live in `:root` at the top of each stylesheet, so themes are a token-block
+  swap. Dark palette: deep navy (`#0b1322` → `#090f1c`), electric blue accent
+  (`#5b9bff`), success green (`#3ddc97`). Light palette: white → cool gray
+  (`#ffffff` → `#f4f7fc`), deeper blue accent (`#2f6bff`), darker success green
+  (`#12945f`) for contrast on white. Type is the system UI stack (Inter/SF/Segoe
+  first) throughout.
 - Each feature is one `<article class="card">` block; edit copy in place or restyle
   globally via the tokens.

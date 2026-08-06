@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="hz:slide-selector" content=".slide">
+<title>Key Features Summary — End-to-End Job Matching Platform</title>
+<style>
+  :root {
+    --page: #05070d;
+    --canvas-top: #0b1322;
+    --canvas-bottom: #090f1c;
+    --card-border: rgba(163, 190, 255, 0.14);
+    --hairline: rgba(163, 190, 255, 0.12);
+    --text: #f2f6fd;
+    --text-dim: #9fadc6;
+    --text-faint: #68748f;
+    --accent: #5b9bff;
+    --accent-ink: #8db9ff;
+    --accent-soft: rgba(91, 155, 255, 0.13);
+    --accent-border: rgba(91, 155, 255, 0.30);
+    --success: #3ddc97;
+    --success-ink: #8fe9c4;
+    --success-soft: rgba(61, 220, 151, 0.12);
+    --success-border: rgba(61, 220, 151, 0.36);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--page);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    font-family: "Inter", "SF Pro Text", "Segoe UI Variable", "Segoe UI",
+      system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    color: var(--text);
+    background:
+      radial-gradient(1250px 720px at 12% -10%, rgba(91, 155, 255, 0.16), transparent 60%),
+      radial-gradient(1050px 640px at 104% 116%, rgba(61, 220, 151, 0.10), transparent 60%),
+      linear-gradient(180deg, var(--canvas-top) 0%, var(--canvas-bottom) 100%);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    padding: 56px 72px;
+  }
+
+  /* ---------- header ---------- */
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  h1 {
+    margin-top: 12px;
+    font-size: 58px;
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    margin-top: 14px;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--text-dim);
+    max-width: 1060px;
+  }
+
+  .scoreboard {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 30px;
+    border-radius: 20px;
+    background: var(--success-soft);
+    border: 1px solid var(--success-border);
+    white-space: nowrap;
+  }
+
+  .scoreboard svg {
+    width: 46px;
+    height: 46px;
+    color: var(--success);
+  }
+
+  .scoreboard .score {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .scoreboard .score-label {
+    margin-top: 4px;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--success-ink);
+  }
+
+  /* ---------- feature grid ---------- */
+
+  .grid {
+    flex: 1;
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+    border: 1px solid var(--card-border);
+    background: linear-gradient(180deg, rgba(148, 178, 255, 0.07), rgba(148, 178, 255, 0.025));
+    padding: 24px 26px;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .icon-tile {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-ink);
+  }
+
+  .icon-tile svg { width: 27px; height: 27px; }
+
+  .check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--success-soft);
+    border: 1px solid var(--success-border);
+    color: var(--success);
+  }
+
+  .check svg { width: 14px; height: 14px; }
+
+  .card h3 {
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 22.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    margin-top: 8px;
+    font-size: 16.5px;
+    line-height: 1.45;
+    color: var(--text-dim);
+  }
+
+  .source-pills {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .source-pills span {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #c9d6ef;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(148, 178, 255, 0.10);
+    border: 1px solid var(--card-border);
+  }
+
+  /* ---------- footer ---------- */
+
+  .footer {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .chips {
+    display: flex;
+    gap: 10px;
+  }
+
+  .chips span {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #c9d6ef;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(148, 178, 255, 0.08);
+    border: 1px solid var(--card-border);
+    white-space: nowrap;
+  }
+
+  .chips span::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .credit {
+    font-size: 15px;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<section class="slide" data-canvas-width="1920" data-canvas-height="1080">
+
+  <header class="header">
+    <div>
+      <span class="eyebrow">End-to-End Job Matching Platform</span>
+      <h1>Key Features Summary</h1>
+      <p class="subtitle">A complete end-to-end job matching solution with enterprise-grade
+        features, AI-powered matching, and comprehensive user management capabilities.</p>
+    </div>
+    <div class="scoreboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9.2"/>
+        <path d="M8 12.4l2.8 2.8 5.4-6"/>
+      </svg>
+      <div>
+        <div class="score">9 / 9</div>
+        <div class="score-label">Core features complete</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l7 3v5.1c0 4.3-2.9 7.4-7 8.9-4.1-1.5-7-4.6-7-8.9V6l7-3z"/>
+            <circle cx="12" cy="10.6" r="1.7"/>
+            <path d="M12 12.3v2.5"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Complete Authentication</h3>
+      <p>Multi-provider OAuth with enterprise support.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13.6 3H7.2c-.9 0-1.7.7-1.7 1.6v14.8c0 .9.8 1.6 1.7 1.6h9.6c.9 0 1.7-.7 1.7-1.6V7.9L13.6 3z"/>
+            <path d="M13.6 3v4.9h4.9"/>
+            <path d="M11.1 11.2l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1 1-2.2z"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>AI Resume Parsing</h3>
+      <p>OpenAI-powered document processing.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3.2l8.8 4.8L12 12.8 3.2 8l8.8-4.8z"/>
+            <path d="M3.2 12.6l8.8 4.8 8.8-4.8"/>
+            <path d="M3.2 17l8.8 4.8 8.8-4.8"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>4-Source Job Aggregation</h3>
+      <div class="source-pills">
+        <span>Indeed</span><span>LinkedIn</span><span>Glassdoor</span><span>ZipRecruiter</span>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.6"/>
+            <path d="M15.6 15.6L21 21"/>
+            <path d="M8.3 9.3h5"/>
+            <path d="M9.3 12.3h3"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Advanced Search</h3>
+      <p>20+ filtering criteria with saved searches.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 4H7a2 2 0 0 0-2 2v13.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/>
+            <rect x="9" y="2.5" width="6" height="3.2" rx="1.1"/>
+            <path d="M9.2 13.2l2.1 2.1 3.8-4.4"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Application Tracking</h3>
+      <p>Complete lifecycle management.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3.8 20.5h16.4"/>
+            <g stroke-width="2.6">
+              <path d="M8 20.5v-6.6"/>
+              <path d="M12.2 20.5v-11.8"/>
+              <path d="M16.4 20.5v-4.4"/>
+            </g>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Analytics Dashboard</h3>
+      <p>Progress tracking with visualizations.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3.2" y="6.2" width="16.2" height="12.6" rx="2.1"/>
+            <path d="M4.4 8.1l6.9 5.1 6.9-5.1"/>
+            <circle cx="19.8" cy="5.5" r="2.5" fill="#3ddc97" stroke="#0d1526" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Email Notifications</h3>
+      <p>Automated alerts and summaries.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <ellipse cx="12" cy="5.6" rx="7.6" ry="2.9"/>
+            <path d="M4.4 5.6v12.8c0 1.6 3.4 2.9 7.6 2.9s7.6-1.3 7.6-2.9V5.6"/>
+            <path d="M4.4 12c0 1.6 3.4 2.9 7.6 2.9s7.6-1.3 7.6-2.9"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Database Persistence</h3>
+      <p>PostgreSQL with comprehensive schema.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.8 21V5a1.6 1.6 0 0 1 1.6-1.6h7A1.6 1.6 0 0 1 15 5v16"/>
+            <path d="M15 9.4h3.6a1.6 1.6 0 0 1 1.6 1.6v10"/>
+            <path d="M3.4 21h17.4"/>
+            <path d="M7.8 7h1.4M11 7h1.4M7.8 10.4h1.4M11 10.4h1.4M7.8 13.8h1.4M11 13.8h1.4M17.2 12.6h.9M17.2 15.8h.9"/>
+            <path d="M9.3 21v-3h1.9v3"/>
+          </svg>
+        </div>
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12.5l4.5 4.5L19 8"/>
+          </svg>
+        </div>
+      </div>
+      <h3>Enterprise Ready</h3>
+      <p>Scalable architecture with proper error handling.</p>
+    </article>
+
+  </div>
+
+  <footer class="footer">
+    <div class="chips">
+      <span>Enterprise-grade features</span>
+      <span>AI-powered matching</span>
+      <span>Comprehensive user management</span>
+    </div>
+    <div class="credit">Key Features Summary · Prepared for Claude Design</div>
+  </footer>
+
+</section>
+
+</body>
+</html>

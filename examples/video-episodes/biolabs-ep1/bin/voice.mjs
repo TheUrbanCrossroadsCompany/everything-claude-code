@@ -26,7 +26,7 @@ if (!sb.voice?.voiceId || sb.voice.voiceId.startsWith("REPLACE_")) {
   process.exit(1);
 }
 
-await fs.mkdir("audio", { recursive: true });
+await fs.mkdir("public/audio", { recursive: true });
 
 // Group per-character alignment into words on whitespace boundaries.
 function charsToWords(alignment) {
@@ -81,10 +81,10 @@ for (const scene of sb.scenes) {
   }
 
   const json = await res.json();
-  await fs.writeFile(`audio/scene-${id}.mp3`, Buffer.from(json.audio_base64, "base64"));
+  await fs.writeFile(`public/audio/scene-${id}.mp3`, Buffer.from(json.audio_base64, "base64"));
 
   const words = charsToWords(json.alignment);
-  await fs.writeFile(`audio/scene-${id}.words.json`, JSON.stringify(words, null, 2));
+  await fs.writeFile(`public/audio/scene-${id}.words.json`, JSON.stringify(words, null, 2));
 
   const end = words.at(-1)?.end ?? 2;
   scene.durationSeconds = Math.round((end + 0.4) * 10) / 10; // measured length + short tail

@@ -14,15 +14,16 @@ npm i -D remotion @remotion/cli @remotion/media-utils
 npm i @elevenlabs/elevenlabs-js @fal-ai/client
 ```
 
-Project layout per episode:
+Project layout per episode (see `examples/video-episodes/biolabs-ep1/` for a working one):
 
 ```text
 episode/
+  package.json  remotion.config.ts  tsconfig.json   # self-contained project wrapper
   storyboard.json          # subject   (schemas/storyboard.schema.json)
   brand.json               # client    (schemas/brand-kit.schema.json)
-  audio/  scene-01.mp3  scene-01.words.json ...
-  broll/  scene-01.mp4 ...
-  remotion/  Root.tsx  Episode.tsx  graphics/*  Captions.tsx
+  bin/  voice.mjs  broll.mjs
+  public/  audio/  broll/   # staticFile() root — generated, gitignored
+  remotion/  index.ts  Root.tsx  Episode.tsx  graphics/*  Captions.tsx
   out/    episode.mp4
 ```
 
@@ -63,9 +64,9 @@ for (const scene of sb.scenes) {
       }) });
   const j = await r.json();
   const id = String(scene.id).padStart(2, "0");
-  await fs.writeFile(`audio/scene-${id}.mp3`, Buffer.from(j.audio_base64, "base64"));
+  await fs.writeFile(`public/audio/scene-${id}.mp3`, Buffer.from(j.audio_base64, "base64"));
   const words = charsToWords(j.alignment);
-  await fs.writeFile(`audio/scene-${id}.words.json`, JSON.stringify(words, null, 2));
+  await fs.writeFile(`public/audio/scene-${id}.words.json`, JSON.stringify(words, null, 2));
   scene.durationSeconds = Math.ceil((words.at(-1)?.end ?? 2) * 10) / 10 + 0.4; // + tail
 }
 await fs.writeFile("storyboard.json", JSON.stringify(sb, null, 2)); // durations written back
@@ -105,8 +106,8 @@ for (const scene of sb.scenes) {
   });
   const id = String(scene.id).padStart(2, "0");
   const buf = Buffer.from(await (await fetch(res.data.video.url)).arrayBuffer());
-  await fs.writeFile(`broll/scene-${id}.mp4`, buf);
-  scene.broll.file = `broll/scene-${id}.mp4`;
+  await fs.writeFile(`public/broll/scene-${id}.mp4`, buf);
+  scene.broll.file = `broll/scene-${id}.mp4`; // path staticFile() resolves under public/
 }
 await fs.writeFile("storyboard.json", JSON.stringify(sb, null, 2));
 ```
@@ -125,8 +126,11 @@ The Remotion project reads `storyboard.json` + `brand.json` and mounts each scen
 worked components in `examples/video-episodes/biolabs-ep1/remotion/`.
 
 ```bash
-npx remotion studio              # preview and scrub the timeline
-npx remotion render Episode out/episode.mp4 --codec=h264 --concurrency=4
+npm run studio                   # preview and scrub the timeline
+npm run render                   # -> out/episode.mp4
+
+# equivalently, with the entry point spelled out:
+npx remotion render remotion/index.ts Episode out/episode.mp4 --codec=h264 --concurrency=4
 ```
 
 Cloud render (no local GPU, parallel):

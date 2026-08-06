@@ -10,6 +10,10 @@ This example ships the parts Claude authors. The voice and b-roll assets are gen
 ## What's here
 
 ```text
+package.json        # self-contained Remotion project (npm install && npm run render)
+remotion.config.ts  # render settings (codec, overwrite)
+tsconfig.json
+public/             # staticFile() root — generated assets land here (gitignored)
 brand.json          # Electric Studio kit (validates: schemas/brand-kit.schema.json)
 storyboard.json     # 8 scenes, fact-locked (validates: schemas/storyboard.schema.json)
 script.md           # the narration, read-aloud
@@ -24,24 +28,29 @@ remotion/           # the composition Claude wrote
             Flow.tsx  Quote.tsx  Timeline.tsx  Cta.tsx  TitleCard.tsx
 ```
 
-Generated later, not committed:
+Generated later, not committed (all gitignored):
 
 ```text
-audio/scene-01.mp3  audio/scene-01.words.json  ...   (Stage 2, ElevenLabs)
-broll/scene-01.mp4  ...                              (Stage 3, Kling)
-out/episode.mp4                                       (Stage 6, Remotion)
+public/audio/scene-01.mp3  public/audio/scene-01.words.json   (npm run voice)
+public/broll/scene-01.mp4  ...                                (npm run broll)
+out/episode.mp4                                                (npm run render)
 ```
 
 ## Run it
 
-1. Put `brand.json`, `storyboard.json`, and `remotion/` into a Remotion project; set
-   `remotion/index.ts` as the entry. Add `audio/` and `broll/` to the `public/` dir so
-   `staticFile()` resolves them.
-2. Clone your voice in ElevenLabs; paste its id into `storyboard.json` → `voice.voiceId`.
-3. `node bin/voice.mjs` — renders narration + word timings, writes `durationSeconds` back.
-4. `node bin/broll.mjs` — renders Kling clips, writes each `broll.file` back.
-5. `npx remotion studio` to preview, then
-   `npx remotion render Episode out/episode.mp4 --codec=h264`.
+This folder is a self-contained Remotion project — no setup beyond installing deps.
+
+1. `npm install`
+2. Clone your voice in ElevenLabs; paste its id into `storyboard.json` → `voice.voiceId`,
+   then export `ELEVENLABS_API_KEY` and `FAL_KEY`.
+3. `npm run voice` — narration + word timings into `public/audio/`, writes durations back.
+4. `npm run broll` — Kling clips into `public/broll/` (optional; skip for graphics-only).
+5. `npm run studio` to preview, or `npm run render` → `out/episode.mp4`.
+
+Or run the whole pipeline in one shot: `npm run video`.
+
+> Run `npm run voice` before rendering — the composition needs the narration audio and the
+> measured scene durations. B-roll is optional; without it, scenes fall back to the graphics.
 
 ## Notes
 

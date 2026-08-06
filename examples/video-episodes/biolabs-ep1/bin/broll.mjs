@@ -29,7 +29,7 @@ const STYLE =
 
 const SB_PATH = path.resolve("storyboard.json");
 const sb = JSON.parse(await fs.readFile(SB_PATH, "utf8"));
-await fs.mkdir("broll", { recursive: true });
+await fs.mkdir("public/broll", { recursive: true });
 
 const force = process.argv.includes("--force");
 
@@ -38,7 +38,8 @@ for (const scene of sb.scenes) {
   if (!b || b.provider === "none") continue;
 
   const id = String(scene.id).padStart(2, "0");
-  const out = `broll/scene-${id}.mp4`;
+  const rel = `broll/scene-${id}.mp4`; // path staticFile() resolves under public/
+  const out = `public/${rel}`;
 
   if (!force && b.file) {
     try {
@@ -70,7 +71,7 @@ for (const scene of sb.scenes) {
 
   const buf = Buffer.from(await (await fetch(url)).arrayBuffer());
   await fs.writeFile(out, buf);
-  scene.broll.file = out;
+  scene.broll.file = rel;
   console.log("ok");
 
   // Save progress after each clip so a mid-run failure doesn't lose finished work.

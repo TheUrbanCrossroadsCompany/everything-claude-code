@@ -29,7 +29,8 @@ episode/
 ## Stage 2 — Narration with word timestamps (ElevenLabs)
 
 The `with-timestamps` endpoint returns audio **and** per-character timings. Group them into
-words so captions and reveals can sync. Reference `bin/voice.mjs`:
+words so captions and reveals can sync. A ready-to-run copy of both scripts below lives in
+`examples/video-episodes/biolabs-ep1/bin/`. Reference `bin/voice.mjs`:
 
 ```js
 import fs from "node:fs/promises";

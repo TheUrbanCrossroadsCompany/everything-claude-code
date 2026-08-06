@@ -14,9 +14,14 @@ brand.json          # Electric Studio kit (validates: schemas/brand-kit.schema.j
 storyboard.json     # 8 scenes, fact-locked (validates: schemas/storyboard.schema.json)
 script.md           # the narration, read-aloud
 kling-prompts.md    # one b-roll prompt per scene, shared seed + style
+bin/
+  voice.mjs         # Stage 2 — ElevenLabs narration + word timestamps
+  broll.mjs         # Stage 3 — Kling b-roll clips (resumable)
 remotion/           # the composition Claude wrote
   index.ts  Root.tsx  Episode.tsx  Captions.tsx
-  graphics/ HeroTitle.tsx  StatRow.tsx  TitleCard.tsx
+  graphics/ helpers.ts
+            HeroTitle.tsx  StatRow.tsx  Split.tsx  Chips.tsx
+            Flow.tsx  Quote.tsx  Timeline.tsx  Cta.tsx  TitleCard.tsx
 ```
 
 Generated later, not committed:
@@ -40,8 +45,9 @@ out/episode.mp4                                       (Stage 6, Remotion)
 
 ## Notes
 
-- `HeroTitle` and `StatRow` are fully built; `split`, `chips`, `flow`, `timeline`, `quote`,
-  and `cta` fall back to `TitleCard` until you generate them (same pattern — ask Claude).
+- All eight graphic types are built — `hero-title`, `stat-row`, `split`, `chips`, `flow`,
+  `quote`, `timeline`, `cta` — sharing motion and semantic colour via `graphics/helpers.ts`.
+  `TitleCard` stays as the fallback for any type added later.
 - Every number in `storyboard.json` traces to the source brief. 2028 Medicare and the fall
   FDA meeting are labelled targets/plans. Scene 8 carries the disclaimer.
 - Cobalt is the core-business accent; teal appears only in Scene 5 (the longevity pilot).

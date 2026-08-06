@@ -10,13 +10,25 @@ import {
 import { Captions } from "./Captions";
 import { HeroTitle } from "./graphics/HeroTitle";
 import { StatRow } from "./graphics/StatRow";
+import { Split } from "./graphics/Split";
+import { Chips } from "./graphics/Chips";
+import { Flow } from "./graphics/Flow";
+import { Quote } from "./graphics/Quote";
+import { Timeline } from "./graphics/Timeline";
+import { Cta } from "./graphics/Cta";
 import { TitleCard } from "./graphics/TitleCard";
 
-// Map storyboard graphic.type -> component. Add split / chips / flow / timeline /
-// quote / cta the same way; TitleCard is the fallback so the timeline always renders.
+// Map storyboard graphic.type -> component. TitleCard is the fallback for any type
+// without a bespoke component (e.g. "stat", "lower-third", "none").
 const GRAPHICS: Record<string, React.FC<any>> = {
   "hero-title": HeroTitle,
   "stat-row": StatRow,
+  split: Split,
+  chips: Chips,
+  flow: Flow,
+  quote: Quote,
+  timeline: Timeline,
+  cta: Cta,
 };
 
 const pad = (n: number) => String(n).padStart(2, "0");

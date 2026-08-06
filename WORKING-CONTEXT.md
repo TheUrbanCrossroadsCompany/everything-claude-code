@@ -1,6 +1,6 @@
 # Working Context
 
-Last updated: 2026-04-08
+Last updated: 2026-08-06
 
 ## Purpose
 
@@ -91,6 +91,11 @@ Keep this file detailed for only the current sprint, blockers, and next actions.
 
 ## Latest Execution Notes
 
+- 2026-08-06: Added the Kling AI hosted MCP endpoint (`https://kling.ai/mcp`, OAuth on first use) to `mcp-configs/mcp-servers.json` via `#8`, with the `mcp-kling` npx access/secret-key server documented as the key-based alternative. The endpoint is unreachable from sandboxed CI network policy, so it was owner-verified.
+- 2026-08-06: Cleared the full Dependabot alert backlog to zero across both tracked lockfiles. `#4` patched `yarn.lock` (undici 6.27.0, linkify-it 5.0.2, markdown-it 14.3.0, js-yaml 4.3.0/5.2.1, brace-expansion 5.0.7) and bumped `markdownlint-cli` to `^0.49.1` because 0.48.0 tilde-pinned js-yaml/markdown-it to patch lines with no fixed release. `#5` regenerated the root `package-lock.json`, which still carried the stale vulnerable pins that Dependabot scans independently. `.opencode/package-lock.json` audited clean and untouched.
+- 2026-08-06: Merged Dependabot `#1` (tar 7.5.13 -> 7.5.16 extraction-hardening fixes) after confirming the lockfile-only diff and clean mergeability.
+- 2026-08-06: Added the Mobbin design-reference MCP server (`https://api.mobbin.com/mcp`, OAuth on first use) to `mcp-configs/mcp-servers.json` via `#2`. Catalog now carries 30 server definitions; README cross-harness MCP counts synced from the stale 14 to 30.
+- 2026-08-06: Test-suite baseline through all of the above: 2378-2379 passing with the same small set of pre-existing flaky failures (read-only-file, observe.sh legacy fields, project-id hash, saveAliases restore) appearing in varying subsets; no regressions introduced. Note for future sessions: `npm install` against this repo rewrites the Yarn Berry `yarn.lock` into v1 format (npm's yarn.lock sync) — restore it and use the pinned `yarn@4.9.2` via corepack for any Yarn lockfile work.
 - 2026-04-05: Continued `#1213` overlap cleanup by narrowing `coding-standards` into the baseline cross-project conventions layer instead of deleting it. The skill now explicitly points detailed React/UI guidance to `frontend-patterns`, backend/API structure to `backend-patterns` / `api-design`, and keeps only reusable naming, readability, immutability, and code-quality expectations.
 - 2026-04-05: Added a packaging regression guard for the OpenCode release path after `#1287` showed the published `v1.10.0` artifact was still stale. `tests/scripts/build-opencode.test.js` now asserts the `npm pack --dry-run` tarball includes `.opencode/dist/index.js` plus compiled plugin/tool entrypoints, so future releases cannot silently omit the built OpenCode payload.
 - 2026-04-05: Landed `skills/agent-introspection-debugging` for `#829` as an ECC-native self-debugging framework. It is intentionally guidance-first rather than fake runtime automation: capture failure state, classify the pattern, apply the smallest contained recovery action, then emit a structured introspection report and hand off to `verification-loop` / `continuous-learning-v2` when appropriate.

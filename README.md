@@ -1366,7 +1366,7 @@ The configuration is automatically detected from `.opencode/opencode.json`.
 | Skills | PASS: 228 skills | PASS: 37 skills | **Claude Code leads** |
 | Hooks | PASS: 8 event types | PASS: 11 events | **OpenCode has more!** |
 | Rules | PASS: 29 rules | PASS: 13 instructions | **Claude Code leads** |
-| MCP Servers | PASS: 14 servers | PASS: Full | **Full parity** |
+| MCP Servers | PASS: 30 servers | PASS: Full | **Full parity** |
 | Custom Tools | PASS: Via hooks | PASS: 6 native tools | **OpenCode is better** |
 
 ### Hook Support via Plugins
@@ -1530,7 +1530,7 @@ ECC is the **first plugin to maximize every major AI coding tool**. Here's how e
 | **Hook Scripts** | 20+ scripts | 16 scripts (DRY adapter) | N/A | Plugin hooks | N/A |
 | **Rules** | 34 (common + lang) | 34 (YAML frontmatter) | Instruction-based | 13 instructions | 1 always-on file |
 | **Custom Tools** | Via hooks | Via hooks | N/A | 6 native tools | N/A |
-| **MCP Servers** | 14 | Shared (mcp.json) | 7 (auto-merged via TOML parser) | Full | N/A |
+| **MCP Servers** | 30 | Shared (mcp.json) | 7 (auto-merged via TOML parser) | Full | N/A |
 | **Config Format** | settings.json | hooks.json + rules/ | config.toml | opencode.json | copilot-instructions.md + settings.json |
 | **Context File** | CLAUDE.md + AGENTS.md | AGENTS.md | AGENTS.md | AGENTS.md | copilot-instructions.md |
 | **Secret Detection** | Hook-based | beforeSubmitPrompt hook | Sandbox-based | Hook-based | Instruction-based |

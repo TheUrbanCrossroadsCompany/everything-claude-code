@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1080px; height:1350px; overflow:hidden; background:#05080f; }
+  #stage { position:relative; width:1080px; height:1350px; overflow:hidden;
+           font-family:"Arial Black","Arial Bold",Arial,sans-serif; }
+  canvas#bg { position:absolute; inset:0; }
+  .scene { position:absolute; inset:0; display:flex; flex-direction:column;
+           align-items:center; justify-content:center; text-align:center; }
+  .grain { position:absolute; inset:0; pointer-events:none; opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E"); }
+  .vignette { position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(0,0,0,.55) 100%); }
+
+  .w-white  { color:#e8e4da; }
+  .w-gold   { color:#f0a818; }
+  .w-blue   { color:#3aa5e8; }
+
+  .big { font-size:118px; line-height:1.04; font-weight:900; letter-spacing:2px;
+         text-shadow:0 6px 30px rgba(0,0,0,.8); }
+  .shift { font-family:"Comic Sans MS","Brush Script MT",cursive;
+           font-size:230px; font-weight:900; font-style:italic; color:#3aa5e8;
+           text-shadow:0 0 60px rgba(58,165,232,.55), 0 8px 30px rgba(0,0,0,.8);
+           transform:rotate(-4deg); }
+  .rule { width:420px; height:5px; background:#e8e4da; margin:26px auto; opacity:.85; }
+
+  .quotebox { border:5px solid #3aa5e8; padding:56px 70px; max-width:820px;
+              background:rgba(5,10,20,.55); box-shadow:0 0 50px rgba(58,165,232,.25);
+              font-size:52px; font-weight:900; line-height:1.35; letter-spacing:1px; }
+
+  .steps { display:flex; gap:26px; justify-content:center; align-items:flex-start;
+           width:1000px; }
+  .step { flex:1; display:flex; flex-direction:column; align-items:center; gap:18px;
+          padding:0 8px; border-left:3px solid rgba(58,165,232,.4); }
+  .step:first-child { border-left:none; }
+  .step .icon { font-size:74px; filter:drop-shadow(0 0 14px rgba(58,165,232,.6)); }
+  .step .lab  { font-size:26px; font-weight:900; line-height:1.3; letter-spacing:.5px; }
+  .step .lab .g { color:#f0a818; } .step .lab .w { color:#e8e4da; }
+
+  .newline1 { font-size:56px; font-weight:900; letter-spacing:4px; color:#e8e4da;
+              text-shadow:0 4px 20px rgba(0,0,0,.8); }
+  .newlife { font-size:190px; font-weight:900; letter-spacing:10px; color:#3aa5e8;
+             text-shadow:0 0 70px rgba(58,165,232,.6), 0 8px 30px rgba(0,0,0,.9); }
+  .closer { font-family:"Brush Script MT","Segoe Script",cursive; font-size:74px;
+            color:#e8e4da; text-shadow:0 0 30px rgba(232,228,218,.35); }
+  .boxrule { width:760px; height:4px; background:#3aa5e8; margin:20px auto; }
+  .crown { font-size:64px; color:#f0a818; text-shadow:0 0 24px rgba(240,168,24,.7); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg" width="1080" height="1350"></canvas>
+
+  <!-- Scene 1: THE MOMENT YOU DECIDE YOU DESERVE BETTER -->
+  <div class="scene" id="s1" style="gap:10px;">
+    <div class="crown" id="s1crown">&#9818;</div>
+    <div class="big w-white" id="s1a">THE MOMENT</div>
+    <div class="big w-gold"  id="s1b">YOU DECIDE</div>
+    <div class="big w-white" id="s1c">YOU DESERVE</div>
+    <div class="big w-gold"  id="s1d" style="font-size:150px;">BETTER,</div>
+  </div>
+
+  <!-- Scene 2: EVERYTHING BEGINS TO SHIFT -->
+  <div class="scene" id="s2" style="gap:6px;">
+    <div class="rule" id="s2r1"></div>
+    <div class="big w-white" id="s2a" style="font-size:92px;">EVERYTHING</div>
+    <div class="big w-white" id="s2b" style="font-size:110px;">BEGINS TO</div>
+    <div class="shift" id="s2c">SHIFT.</div>
+  </div>
+
+  <!-- Scene 3: quote box -->
+  <div class="scene" id="s3">
+    <div class="quotebox" id="s3box">
+      <span class="w-white">YOU DON'T NEED</span><br>
+      <span class="w-gold">A PERFECT PLAN.</span><br>
+      <span class="w-white">YOU NEED A</span><br>
+      <span class="w-gold">STRONG DECISION.</span>
+    </div>
+  </div>
+
+  <!-- Scene 4: 5 steps -->
+  <div class="scene" id="s4">
+    <div class="steps">
+      <div class="step" id="st1"><div class="icon">&#127919;</div><div class="lab"><span class="g">CLARIFY</span><br><span class="w">YOUR WHY.</span></div></div>
+      <div class="step" id="st2"><div class="icon">&#127939;</div><div class="lab"><span class="g">TAKE</span><br><span class="w">THE FIRST STEP.</span></div></div>
+      <div class="step" id="st3"><div class="icon">&#128737;&#xFE0F;</div><div class="lab"><span class="g">STAY DISCIPLINED.</span><br><span class="w">PROTECT YOUR PEACE.</span></div></div>
+      <div class="step" id="st4"><div class="icon">&#9968;&#xFE0F;</div><div class="lab"><span class="g">PUSH THROUGH</span><br><span class="w">THE HARD DAYS.</span></div></div>
+      <div class="step" id="st5"><div class="icon">&#127749;</div><div class="lab"><span class="g">WAKE UP</span><br><span class="w">TO A BETTER YOU.</span></div></div>
+    </div>
+  </div>
+
+  <!-- Scene 5: NEW LIFE -->
+  <div class="scene" id="s5" style="gap:8px;">
+    <div class="newline1" id="s5a">NEW ENERGY. NEW HABITS. NEW RESULTS.</div>
+    <div class="boxrule" id="s5r1"></div>
+    <div class="newlife" id="s5b">NEW LIFE.</div>
+    <div class="boxrule" id="s5r2"></div>
+    <div class="closer" id="s5c">You're closer than you think.</div>
+  </div>
+
+  <div class="vignette"></div>
+  <div class="grain"></div>
+</div>
+
+<script>
+// ---------- deterministic timeline; window.seek(t) renders state at time t ----------
+const W=1080, H=1350;
+const ctx = document.getElementById('bg').getContext('2d');
+
+function clamp(x,a,b){ return Math.max(a,Math.min(b,x)); }
+function ease(x){ x=clamp(x,0,1); return x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; }
+function easeOut(x){ x=clamp(x,0,1); return 1-Math.pow(1-x,3); }
+// punch-in: overshoot scale
+function punch(x){ x=clamp(x,0,1); const c=1.70158+1, s=x-1; return 1+ (s*s*((c)*s+c-1)+1) - 1 + (x===0?0:0) + ( (s*s*((c+1)*s+c))+1 ) - ( (s*s*((c)*s+c-1)+1) ); }
+function backOut(x){ x=clamp(x,0,1); const c1=1.70158, c3=c1+1; return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2); }
+
+// deterministic pseudo-random
+function rnd(i){ const x=Math.sin(i*127.1+311.7)*43758.5453; return x-Math.floor(x); }
+
+// ---------- background: sky, sea, lighthouse w/ rotating beam, spray particles ----------
+function drawBG(t){
+  ctx.clearRect(0,0,W,H);
+  // sky gradient (dark navy -> storm blue -> warm horizon)
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#04070e');
+  sky.addColorStop(.45,'#0a1a2e');
+  sky.addColorStop(.62,'#1d3a55');
+  sky.addColorStop(.72,'#b06a1a');
+  sky.addColorStop(.78,'#173049');
+  sky.addColorStop(1,'#040a14');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+
+  // clouds (slow drift)
+  ctx.save();
+  for(let i=0;i<10;i++){
+    const cx = ((rnd(i)*1400 + t*12*(0.4+rnd(i+50)*.6)) % 1400) - 160;
+    const cy = 90 + rnd(i+10)*520;
+    const cw = 200 + rnd(i+20)*300, ch = 40+rnd(i+30)*60;
+    const g = ctx.createRadialGradient(cx,cy,10,cx,cy,cw);
+    g.addColorStop(0,'rgba(30,55,85,0.55)'); g.addColorStop(1,'rgba(30,55,85,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.ellipse(cx,cy,cw,ch,0,0,7); ctx.fill();
+  }
+  ctx.restore();
+
+  const LX=810, LTOP=210, LBASE=930;   // lighthouse position
+  // rotating beam behind tower
+  const ang = -0.55 + 0.42*Math.sin(t*0.9);
+  ctx.save();
+  ctx.translate(LX, LTOP+40);
+  ctx.rotate(ang);
+  const beam = ctx.createLinearGradient(0,0,-900,0);
+  beam.addColorStop(0,'rgba(255,210,110,0.85)');
+  beam.addColorStop(1,'rgba(255,210,110,0)');
+  ctx.fillStyle=beam;
+  ctx.beginPath(); ctx.moveTo(0,-6); ctx.lineTo(-950,-120); ctx.lineTo(-950,120); ctx.lineTo(0,6); ctx.closePath(); ctx.fill();
+  ctx.restore();
+  // beam glow at lamp
+  const pulse = .75 + .25*Math.sin(t*6);
+  let g2 = ctx.createRadialGradient(LX,LTOP+40,4,LX,LTOP+40,150*pulse);
+  g2.addColorStop(0,'rgba(255,225,140,.95)'); g2.addColorStop(1,'rgba(255,225,140,0)');
+  ctx.fillStyle=g2; ctx.fillRect(LX-160,LTOP-120,320,320);
+
+  // lighthouse tower silhouette
+  ctx.fillStyle='#0d1520';
+  ctx.beginPath();
+  ctx.moveTo(LX-42,LBASE); ctx.lineTo(LX-24,LTOP+70); ctx.lineTo(LX+24,LTOP+70); ctx.lineTo(LX+42,LBASE); ctx.closePath(); ctx.fill();
+  // stripes
+  ctx.fillStyle='#131f2e';
+  for(let i=0;i<4;i++){
+    const y1=LTOP+120+i*160, y2=y1+70;
+    const w1=24+(y1-LTOP-70)/(LBASE-LTOP-70)*18, w2=24+(y2-LTOP-70)/(LBASE-LTOP-70)*18;
+    ctx.beginPath(); ctx.moveTo(LX-w1,y1); ctx.lineTo(LX+w1,y1); ctx.lineTo(LX+w2,y2); ctx.lineTo(LX-w2,y2); ctx.closePath(); ctx.fill();
+  }
+  // gallery + lamp room
+  ctx.fillStyle='#0d1520';
+  ctx.fillRect(LX-34,LTOP+52,68,20);
+  ctx.fillRect(LX-20,LTOP+16,40,40);
+  ctx.beginPath(); ctx.moveTo(LX-26,LTOP+18); ctx.lineTo(LX,LTOP-14); ctx.lineTo(LX+26,LTOP+18); ctx.closePath(); ctx.fill();
+  ctx.fillStyle=`rgba(255,220,120,${.8*pulse})`;
+  ctx.fillRect(LX-14,LTOP+22,28,28);
+
+  // rocks
+  ctx.fillStyle='#0a121c';
+  ctx.beginPath();
+  ctx.moveTo(600,LBASE+30); ctx.quadraticCurveTo(760,LBASE-60,1080,LBASE-20);
+  ctx.lineTo(1080,H); ctx.lineTo(600,H); ctx.closePath(); ctx.fill();
+
+  // sea
+  const sea = ctx.createLinearGradient(0,LBASE-40,0,H);
+  sea.addColorStop(0,'#123452'); sea.addColorStop(.5,'#0b2036'); sea.addColorStop(1,'#050d18');
+  ctx.fillStyle=sea; ctx.fillRect(0,LBASE-40,620,H-(LBASE-40));
+  // wave highlights
+  ctx.strokeStyle='rgba(120,190,240,0.25)'; ctx.lineWidth=3;
+  for(let i=0;i<14;i++){
+    const y=LBASE-20+i*30 + Math.sin(t*1.5+i)*4;
+    ctx.beginPath();
+    for(let x=0;x<=640;x+=16){
+      const yy=y+Math.sin(x*0.02+t*2+i*1.7)*6;
+      x===0?ctx.moveTo(x,yy):ctx.lineTo(x,yy);
+    }
+    ctx.stroke();
+  }
+  // golden path reflection on wet stone
+  const path = ctx.createLinearGradient(0,LBASE,0,H);
+  path.addColorStop(0,'rgba(240,170,50,0.5)'); path.addColorStop(1,'rgba(240,170,50,0.05)');
+  ctx.fillStyle=path;
+  ctx.beginPath(); ctx.moveTo(700,LBASE-10); ctx.lineTo(880,LBASE-10); ctx.lineTo(1050,H); ctx.lineTo(560,H); ctx.closePath(); ctx.fill();
+  // cobblestone hint
+  ctx.strokeStyle='rgba(0,0,0,0.35)'; ctx.lineWidth=2;
+  for(let r=0;r<7;r++){
+    const y=LBASE+30+r*55;
+    ctx.beginPath();
+    for(let x=560+ r*10;x<1080;x+=60){ ctx.moveTo(x,y); ctx.lineTo(x+40,y); }
+    ctx.stroke();
+  }
+
+  // sea spray particles near rocks
+  for(let i=0;i<40;i++){
+    const life=(t*0.7+rnd(i))%1;
+    const px=580+rnd(i+7)*140+life*60;
+    const py=LBASE-10-life*220*rnd(i+3);
+    ctx.fillStyle=`rgba(200,230,255,${(1-life)*0.5})`;
+    ctx.beginPath(); ctx.arc(px,py,2+rnd(i+9)*3,0,7); ctx.fill();
+  }
+  // floating dust/embers
+  for(let i=0;i<26;i++){
+    const life=(t*0.25+rnd(i+100))%1;
+    const px=rnd(i+40)*W + Math.sin(t+i)*20;
+    const py=H-life*H;
+    ctx.fillStyle=`rgba(240,180,80,${0.35*(1-Math.abs(life-.5)*2)})`;
+    ctx.beginPath(); ctx.arc(px,py,1.5+rnd(i+60)*2,0,7); ctx.fill();
+  }
+}
+
+// ---------- element helpers ----------
+const $ = id => document.getElementById(id);
+function hide(el){ el.style.opacity=0; }
+function popIn(el, t, t0, dur=0.5, dy=0){
+  const p = (t-t0)/dur;
+  if(p<=0){ el.style.opacity=0; el.style.transform='scale(2.2)'; return; }
+  const e = backOut(p);
+  el.style.opacity = clamp(p*3,0,1);
+  const s = 2.2 - 1.2*e;
+  el.style.transform = `scale(${clamp(s,1,2.2)}) translateY(${dy*(1-e)}px)`;
+}
+function fadeUp(el, t, t0, dur=0.6, dy=40){
+  const p=(t-t0)/dur;
+  if(p<=0){ el.style.opacity=0; el.style.transform=`translateY(${dy}px)`; return; }
+  const e=easeOut(p);
+  el.style.opacity=clamp(p*2,0,1);
+  el.style.transform=`translateY(${dy*(1-e)}px)`;
+}
+function slideIn(el, t, t0, dur=0.45, dx=120){
+  const p=(t-t0)/dur;
+  if(p<=0){ el.style.opacity=0; el.style.transform=`translateX(${dx}px) scale(.7)`; return; }
+  const e=backOut(p);
+  el.style.opacity=clamp(p*2.5,0,1);
+  el.style.transform=`translateX(${dx*(1-e)}px) scale(${.7+.3*e})`;
+}
+function sceneWindow(el, t, tin, tout, fade=0.35){
+  let o=1;
+  if(t<tin) o=0;
+  else if(t<tin+fade) o=(t-tin)/fade;
+  else if(t>tout) o=0;
+  else if(t>tout-fade) o=(tout-t)/fade;
+  el.style.opacity=o;
+  el.style.display = (t<tin-0.05||t>tout+0.05)?'none':'flex';
+  return o>0;
+}
+// camera shake on impacts
+const impacts=[0.45,1.05,1.65,2.30,4.15,12.35];   // times of hits
+function shakeAt(t){
+  let sx=0, sy=0;
+  for(const ti of impacts){
+    const d=t-ti;
+    if(d>0&&d<0.4){
+      const a=(1-d/0.4)*14;
+      sx+=Math.sin(d*90)*a; sy+=Math.cos(d*70)*a*0.7;
+    }
+  }
+  return [sx,sy];
+}
+
+// ---------- master seek ----------
+window.seek = function(t){
+  drawBG(t);
+  const stage=$('stage');
+  const [sx,sy]=shakeAt(t);
+  stage.style.transform=`translate(${sx}px,${sy}px)`;
+
+  // SCENE 1 : 0 - 3.4  (crown, 4 word-punches)
+  if(sceneWindow($('s1'), t, 0, 3.4)){
+    fadeUp($('s1crown'), t, 0.1, 0.5, -30);
+    popIn($('s1a'), t, 0.45);
+    popIn($('s1b'), t, 1.05);
+    popIn($('s1c'), t, 1.65);
+    popIn($('s1d'), t, 2.30);
+  }
+  // SCENE 2 : 3.4 - 6.0 (EVERYTHING BEGINS TO SHIFT.)
+  if(sceneWindow($('s2'), t, 3.4, 6.0)){
+    fadeUp($('s2r1'), t, 3.5, 0.4);
+    fadeUp($('s2a'), t, 3.55, 0.45);
+    fadeUp($('s2b'), t, 3.75, 0.45);
+    popIn($('s2c'), t, 4.15, 0.6);
+    // glow pulse on SHIFT
+    if(t>4.5){ const gp=.55+.35*Math.sin((t-4.5)*7);
+      $('s2c').style.textShadow=`0 0 ${60+40*gp}px rgba(58,165,232,${.4+.35*gp}), 0 8px 30px rgba(0,0,0,.8)`; }
+  }
+  // SCENE 3 : 6.0 - 8.6 (quote box)
+  if(sceneWindow($('s3'), t, 6.0, 8.6)){
+    const p=easeOut((t-6.15)/0.6);
+    const b=$('s3box');
+    b.style.opacity=clamp((t-6.15)/0.3,0,1);
+    b.style.transform=`scale(${.85+.15*clamp(p,0,1)})`;
+    b.style.boxShadow=`0 0 ${50+25*Math.sin(t*3)}px rgba(58,165,232,.3)`;
+  }
+  // SCENE 4 : 8.6 - 11.7 (5 steps)
+  if(sceneWindow($('s4'), t, 8.6, 11.7)){
+    slideIn($('st1'), t, 8.80);
+    slideIn($('st2'), t, 9.25);
+    slideIn($('st3'), t, 9.70);
+    slideIn($('st4'), t, 10.15);
+    slideIn($('st5'), t, 10.60);
+  }
+  // SCENE 5 : 11.7 - 15 (NEW LIFE + closer)
+  if(sceneWindow($('s5'), t, 11.7, 15.0, 0.3)){
+    fadeUp($('s5a'), t, 11.85, 0.5);
+    fadeUp($('s5r1'), t, 12.05, 0.4);
+    popIn($('s5b'), t, 12.35, 0.55);
+    fadeUp($('s5r2'), t, 12.9, 0.4);
+    // handwritten reveal via clip
+    const c=$('s5c'), p=clamp((t-13.3)/1.0,0,1);
+    c.style.opacity=p>0?1:0;
+    c.style.clipPath=`inset(0 ${100-easeOut(p)*100}% 0 0)`;
+    if(t>12.5){ const gp=.5+.5*Math.sin((t-12.5)*5);
+      $('s5b').style.textShadow=`0 0 ${70+50*gp}px rgba(58,165,232,${.45+.3*gp}), 0 8px 30px rgba(0,0,0,.9)`; }
+  }
+  // final fade to black
+  if(t>14.3){
+    stage.style.filter=`brightness(${clamp(1-(t-14.3)/0.7,0,1)})`;
+  } else stage.style.filter='none';
+};
+window.seek(0);
+</script>
+</body>
+</html>

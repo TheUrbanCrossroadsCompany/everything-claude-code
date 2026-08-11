@@ -16,6 +16,7 @@ skills:
   - agentic-engineering
   - agentic-os
   - ai-first-engineering
+  - animation-styles
   - ai-regression-testing
   - android-clean-architecture
   - api-design
@@ -153,6 +154,7 @@ skills:
   - visa-doc-translate
   - x-api
 commands:
+  - animate
   - aside
   - auto-update
   - build-fix

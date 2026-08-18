@@ -40,6 +40,41 @@ Closing statement: "This platform provides a complete end-to-end job matching so
 with enterprise-grade features, AI-powered matching, and comprehensive user management
 capabilities."
 
+## Exporting to PNG / JPEG / PDF
+
+`scripts/export-graphic.mjs` renders any self-contained HTML graphic in this repo to a
+flat image or a one-page PDF, cropped to the design itself rather than the browser
+window. It needs Playwright, which is not a dependency of this repo:
+
+```bash
+npm i -D playwright && npx playwright install chromium
+```
+
+Then, from the repo root:
+
+```bash
+# 3840x2160 PNG (1920 CSS px at 2x) into ./exports
+npm run design:export -- designs/key-features-summary/index.html --width 1920
+
+# all three formats at once
+npm run design:export -- designs/key-features-summary/index.html \
+  --width 1920 --formats png,jpeg,pdf
+```
+
+The script auto-detects the crop target — `.canvas`, `.slide`, `[data-canvas-width]`,
+`[data-graphic-root]`, then `body` — so this design exports at exactly 1920x1080 CSS px
+with no surrounding page background. Pass `--selector` to override it.
+
+Useful flags: `--scale` (device pixel ratio, default 2), `--quality` (JPEG, default 92),
+`--settle` (ms to wait for load animations, default 2600), `--scheme light|dark`,
+`--out` (default `./exports`, git-ignored), and `--no-freeze` to capture animations
+mid-flight instead of pausing them. Run with `--help` for the full list.
+
+Note that `--width` sets the viewport, not the output size. A fixed-canvas design like
+this one renders at its declared 1920x1080 regardless; use `--scale` to change the
+exported resolution. `--width` matters for responsive graphics, where a comma-separated
+list (`--width 1600,1080,800`) emits one file per breakpoint, suffixed `-1600w` and so on.
+
 ## Design notes
 
 - Layout: header (eyebrow, title, subtitle, 9/9 completion badge), 3×3 feature card

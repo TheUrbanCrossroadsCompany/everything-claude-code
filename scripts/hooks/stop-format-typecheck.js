@@ -66,10 +66,10 @@ function formatBatch(projectRoot, files, timeoutMs) {
         process.stderr.write('[Hook] stop-format-typecheck: skipping batch — unsafe path chars\n');
         return;
       }
-      const result = spawnSync(resolved.bin, fileArgs, { cwd: projectRoot, shell: true, stdio: 'pipe', timeout: timeoutMs });
+      const result = spawnSync(resolved.bin, fileArgs, { cwd: projectRoot, shell: true, stdio: 'pipe', timeout: timeoutMs, windowsHide: true });
       if (result.error) throw result.error;
     } else {
-      execFileSync(resolved.bin, fileArgs, { cwd: projectRoot, stdio: ['pipe', 'pipe', 'pipe'], timeout: timeoutMs });
+      execFileSync(resolved.bin, fileArgs, { cwd: projectRoot, stdio: ['pipe', 'pipe', 'pipe'], timeout: timeoutMs, windowsHide: true });
     }
   } catch {
     // Formatter not installed or failed — non-blocking
@@ -92,7 +92,7 @@ function typecheckBatch(tsConfigDir, editedFiles, timeoutMs) {
   const isWin = process.platform === 'win32';
   const npxBin = isWin ? 'npx.cmd' : 'npx';
   const args = ['tsc', '--noEmit', '--pretty', 'false'];
-  const opts = { cwd: tsConfigDir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: timeoutMs };
+  const opts = { cwd: tsConfigDir, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], timeout: timeoutMs, windowsHide: true };
 
   let stdout = '';
   let stderr = '';

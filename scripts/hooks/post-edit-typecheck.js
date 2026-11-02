@@ -57,6 +57,7 @@ process.stdin.on("end", () => {
             encoding: "utf8",
             stdio: ["pipe", "pipe", "pipe"],
             timeout: 30000,
+            windowsHide: true,
           });
         } catch (err) {
           // tsc exits non-zero when there are errors — filter to edited file

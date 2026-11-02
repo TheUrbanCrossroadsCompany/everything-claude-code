@@ -165,7 +165,8 @@ async function main() {
       ECC_HOOK_INPUT_MAX_BYTES: String(MAX_STDIN)
     },
     cwd: process.cwd(),
-    timeout: 30000
+    timeout: 30000,
+    windowsHide: true
   });
 
   writeLegacySpawnOutput(raw, result);

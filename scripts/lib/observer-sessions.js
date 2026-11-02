@@ -45,7 +45,8 @@ function runGit(args, cwd) {
   const result = spawnSync('git', args, {
     cwd,
     encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'ignore']
+    stdio: ['ignore', 'pipe', 'ignore'],
+    windowsHide: true
   });
   if (result.status !== 0) return '';
   return (result.stdout || '').trim();

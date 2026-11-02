@@ -63,7 +63,8 @@ function run(rawInput) {
             cwd: projectRoot,
             shell: true,
             stdio: 'pipe',
-            timeout: 15000
+            timeout: 15000,
+            windowsHide: true
           });
           if (result.error) throw result.error;
           if (typeof result.status === 'number' && result.status !== 0) {
@@ -73,7 +74,8 @@ function run(rawInput) {
           execFileSync(resolved.bin, args, {
             cwd: projectRoot,
             stdio: ['pipe', 'pipe', 'pipe'],
-            timeout: 15000
+            timeout: 15000,
+            windowsHide: true
           });
         }
       } catch {

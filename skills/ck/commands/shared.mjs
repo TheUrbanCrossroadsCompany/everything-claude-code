@@ -148,6 +148,7 @@ function runGit(args, cwd) {
       timeout: 3000,
       stdio: 'pipe',
       encoding: 'utf8',
+      windowsHide: true,
     });
     if (result.status !== 0) return null;
     return result.stdout.trim();

@@ -53,6 +53,7 @@ function getRepoCommit(sourceRoot) {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
       timeout: 5000,
+      windowsHide: true,
     }).trim();
   } catch (_error) {
     return null;

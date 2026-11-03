@@ -346,6 +346,7 @@ function runGit(args, cwd) {
     cwd,
     encoding: 'utf8',
     timeout: 2500,
+    windowsHide: true,
   });
 
   if (result.error || result.status !== 0) {

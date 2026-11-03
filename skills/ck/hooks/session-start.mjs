@@ -50,7 +50,7 @@ function gitLogSince(projectPath, sinceDate) {
     const result = spawnSync(
       'git',
       ['-C', projectPath, 'log', '--oneline', `--since=${sinceDate}`],
-      { timeout: 3000, stdio: 'pipe', encoding: 'utf8' },
+      { timeout: 3000, stdio: 'pipe', encoding: 'utf8', windowsHide: true },
     );
     if (result.status !== 0) return null;
     const output = result.stdout.trim();

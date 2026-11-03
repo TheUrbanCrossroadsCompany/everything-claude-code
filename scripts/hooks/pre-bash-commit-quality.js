@@ -28,7 +28,8 @@ const MAX_STDIN = 1024 * 1024; // 1MB limit
 function getStagedFiles() {
   const result = spawnSync('git', ['diff', '--cached', '--name-only', '--diff-filter=ACMR'], {
     encoding: 'utf8',
-    stdio: ['pipe', 'pipe', 'pipe']
+    stdio: ['pipe', 'pipe', 'pipe'],
+    windowsHide: true
   });
   if (result.status !== 0) {
     return [];
@@ -39,7 +40,8 @@ function getStagedFiles() {
 function getStagedFileContent(filePath) {
   const result = spawnSync('git', ['show', `:${filePath}`], {
     encoding: 'utf8',
-    stdio: ['pipe', 'pipe', 'pipe']
+    stdio: ['pipe', 'pipe', 'pipe'],
+    windowsHide: true
   });
   if (result.status !== 0) {
     return null;
@@ -228,7 +230,8 @@ function runLinterCommand(command, args) {
     encoding: 'utf8',
     stdio: ['pipe', 'pipe', 'pipe'],
     timeout: 30000,
-    shell: useShell
+    shell: useShell,
+    windowsHide: true
   });
 }
 

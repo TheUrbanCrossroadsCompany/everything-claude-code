@@ -325,7 +325,8 @@ function runCommand(program, args, options = {}) {
   const result = spawnSync(program, args, {
     cwd: options.cwd,
     encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe']
+    stdio: ['ignore', 'pipe', 'pipe'],
+    windowsHide: true
   });
 
   if (result.error) {
@@ -342,7 +343,8 @@ function commandSucceeds(program, args, options = {}) {
   const result = spawnSync(program, args, {
     cwd: options.cwd,
     encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe']
+    stdio: ['ignore', 'pipe', 'pipe'],
+    windowsHide: true
   });
   return result.status === 0;
 }
@@ -392,7 +394,8 @@ function cleanupExisting(plan) {
 
   const hasSession = spawnSync('tmux', ['has-session', '-t', plan.sessionName], {
     encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe']
+    stdio: ['ignore', 'pipe', 'pipe'],
+    windowsHide: true
   });
 
   if (hasSession.status === 0) {

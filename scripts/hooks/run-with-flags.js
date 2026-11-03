@@ -152,7 +152,10 @@ async function main() {
     process.exit(0);
   }
 
-  // Legacy path: spawn a child Node process for hooks without run() export
+  // Legacy path: spawn a child Node process for hooks without run() export.
+  // windowsHide is required: this wrapper is itself launched with
+  // windowsHide (CREATE_NO_WINDOW), so it has no console to share, and an
+  // un-hidden node.exe child would get a brand-new visible console window.
   const result = spawnSync(process.execPath, [scriptPath], {
     input: raw,
     encoding: 'utf8',
@@ -165,7 +168,8 @@ async function main() {
       ECC_HOOK_INPUT_MAX_BYTES: String(MAX_STDIN)
     },
     cwd: process.cwd(),
-    timeout: 30000
+    timeout: 30000,
+    windowsHide: true
   });
 
   writeLegacySpawnOutput(raw, result);

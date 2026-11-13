@@ -35,7 +35,8 @@ function exec(command, args, cwd = process.cwd()) {
     cwd,
     encoding: 'utf8',
     env: process.env,
-    timeout: 15000
+    timeout: 15000,
+    windowsHide: true
   });
 }
 

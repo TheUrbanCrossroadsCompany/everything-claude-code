@@ -377,7 +377,8 @@ function probeCommandServer(serverName, config) {
           env: mergedEnv,
           cwd: process.cwd(),
           stdio: ['pipe', 'ignore', 'pipe'],
-          shell: useShell
+          shell: useShell,
+          windowsHide: true
         });
       } catch (error) {
         if ((error.code === 'ENOENT' || error.code === 'EINVAL') && !isLast) {
@@ -534,7 +535,8 @@ function attemptReconnect(serverName) {
     env: process.env,
     cwd: process.cwd(),
     encoding: 'utf8',
-    timeout: envNumber('ECC_MCP_RECONNECT_TIMEOUT_MS', DEFAULT_TIMEOUT_MS)
+    timeout: envNumber('ECC_MCP_RECONNECT_TIMEOUT_MS', DEFAULT_TIMEOUT_MS),
+    windowsHide: true
   });
 
   if (result.error) {

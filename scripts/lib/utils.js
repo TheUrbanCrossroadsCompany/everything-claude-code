@@ -379,10 +379,10 @@ function commandExists(cmd) {
   try {
     if (isWindows) {
       // Use spawnSync to avoid shell interpolation
-      const result = spawnSync('where', [cmd], { stdio: 'pipe' });
+      const result = spawnSync('where', [cmd], { stdio: 'pipe', windowsHide: true });
       return result.status === 0;
     } else {
-      const result = spawnSync('which', [cmd], { stdio: 'pipe' });
+      const result = spawnSync('which', [cmd], { stdio: 'pipe', windowsHide: true });
       return result.status === 0;
     }
   } catch {
@@ -419,6 +419,7 @@ function runCommand(cmd, options = {}) {
     const result = execSync(cmd, {
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
+      windowsHide: true,
       ...options
     });
     return { success: true, output: result.trim() };

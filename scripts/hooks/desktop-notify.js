@@ -57,7 +57,7 @@ function findPowerShell() {
   for (const path of candidates) {
     try {
       const result = spawnSync(path, ['-Command', 'exit 0'],
-        { stdio: ['ignore', 'pipe', 'ignore'], timeout: 3000 });
+        { stdio: ['ignore', 'pipe', 'ignore'], timeout: 3000, windowsHide: true });
       if (result.status === 0) {
         return path;
       }
@@ -78,7 +78,7 @@ function notifyWindows(pwshPath, title, body) {
   const safeTitle = title.replace(/'/g, "''");
   const command = `Import-Module BurntToast; New-BurntToastNotification -Text '${safeTitle}', '${safeBody}'`;
   const result = spawnSync(pwshPath, ['-Command', command],
-    { stdio: ['ignore', 'pipe', 'pipe'], timeout: 5000 });
+    { stdio: ['ignore', 'pipe', 'pipe'], timeout: 5000, windowsHide: true });
   if (result.status === 0) {
     return { success: true, reason: null };
   }
@@ -118,6 +118,7 @@ function findTerminalTTY() {
       const out = execFileSync('ps', ['-o', 'ppid=,tty=', '-p', String(pid)], {
         stdio: ['ignore', 'pipe', 'ignore'],
         timeout: PS_TIMEOUT_MS,
+        windowsHide: true,
       }).toString().trim();
       const m = out.match(/^\s*(\d+)\s+(\S+)\s*$/);
       if (!m) return null;
@@ -184,7 +185,7 @@ function notifyMacOS(title, body) {
   const safeBody = body.replace(/\\/g, '').replace(/"/g, '\u201C');
   const safeTitle = title.replace(/\\/g, '').replace(/"/g, '\u201C');
   const script = `display notification "${safeBody}" with title "${safeTitle}"`;
-  const result = spawnSync('osascript', ['-e', script], { stdio: 'ignore', timeout: 5000 });
+  const result = spawnSync('osascript', ['-e', script], { stdio: 'ignore', timeout: 5000, windowsHide: true });
   if (result.error || result.status !== 0) {
     log(`[DesktopNotify] osascript failed: ${result.error ? result.error.message : `exit ${result.status}`}`);
   }

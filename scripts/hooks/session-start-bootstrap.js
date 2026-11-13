@@ -128,6 +128,7 @@ if (fs.existsSync(script)) {
       env: process.env,
       cwd: process.cwd(),
       timeout: 30000,
+      windowsHide: true,
     }
   );
 
